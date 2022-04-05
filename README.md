@@ -7,7 +7,7 @@ Converts an image into a table.
 Run the following commands:
 
 ```bash
-$> git xlone https://github.com/jamesurobertson/table-image.git
+$> git clone https://github.com/jamesurobertson/table-image.git
 $> cd table-image
 $> python3 -m http.server
 ```
