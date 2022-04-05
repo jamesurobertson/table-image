@@ -1,16 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("input");
-  const canvas = document.getElementById("canvas");
-  const canvasCtx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas");
+  //   const loader = document.getElementById("loader");
+  const ctx = canvas.getContext("2d");
   const worker = new Worker("worker.js");
 
-  const postMessage = () => {
-    const imageData = canvasCtx.getImageData(0, 0, canvas.width, canvas.height);
-    worker.postMessage(imageData);
-  };
-
-  const createTable = (data) => {
+  const createTable = async (data) => {
     const table = document.createElement("table");
+    table.id = "table";
     table.cellSpacing = 0;
     const tbody = document.createElement("tbody");
     table.appendChild(tbody);
@@ -25,20 +22,35 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     document.body.appendChild(table);
-    return table;
+  };
+
+  const postMessage = () => {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    worker.postMessage(imageData);
   };
 
   worker.addEventListener("message", (e) => {
-    createTable(e.data.data);
+    createTable(e.data).then(() => {
+      const loader = document.getElementById("loader");
+      loader.parentNode.removeChild(loader);
+    });
   });
 
   input.addEventListener("change", (e) => {
-    const file = e.target.files[0];
+    const table = document.getElementById("table");
+    if (table) {
+      table.parentNode.removeChild(table);
+    }
+    const loader = document.createElement("div");
+    loader.id = "loader";
+    loader.innerHTML = "Loading...";
+    document.body.appendChild(loader);
 
+    const file = e.target.files[0];
     createImageBitmap(file).then((bitmap) => {
       canvas.height = bitmap.height;
       canvas.width = bitmap.width;
-      canvasCtx.drawImage(bitmap, 0, 0);
+      ctx.drawImage(bitmap, 0, 0);
       postMessage();
     });
   });

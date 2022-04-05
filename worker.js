@@ -2,7 +2,7 @@ addEventListener("message", (d) => {
   const imageData = d.data;
   const width = imageData.width;
   const height = imageData.height;
-  const data = [];
+  const rgbaData = [];
   for (let x = 0; x < width; x++) {
     const row = [];
     for (let y = 0; y < height; y++) {
@@ -13,7 +13,7 @@ addEventListener("message", (d) => {
       const alpha = imageData.data[index + 3];
       row.push({ r: red, g: green, b: blue, a: alpha });
     }
-    data.push(row);
+    rgbaData.push(row);
   }
-  postMessage({ data });
+  postMessage(rgbaData);
 });
