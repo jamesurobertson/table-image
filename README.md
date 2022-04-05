@@ -1,10 +1,8 @@
 ### TABLE-IMAGE
 
-Converts an image into an HTML table of potentially 100,000s of thousands or millions of cells.
+Converts an image into an HTML table or 100s of thousands or millions of cells.
 
 [**Live Link**](https://table-image.netlify.app/)
-
-Best to use on smaller images. Larger images might crash your browser/tab.
 
 ### To Run Locally:
 
