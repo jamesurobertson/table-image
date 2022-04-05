@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const worker = new Worker("worker.js");
 
   const createTable = async (data) => {
+    console.log(data);
     const table = document.createElement("table");
     table.id = "table";
     table.cellSpacing = 0;
@@ -15,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.appendChild(row);
       for (let x = 0; x < data[y].length; x++) {
         const cell = document.createElement("td");
-        cell.style.backgroundColor = `rgba(${data[x][y].r}, ${data[x][y].g}, ${data[x][y].b}, ${data[x][y].a})`;
+        cell.classList.add("cell");
+        cell.style.backgroundColor = `rgba(${data[y][x].r}, ${data[y][x].g}, ${data[y][x].b}, ${data[y][x].a})`;
         row.appendChild(cell);
       }
     }
