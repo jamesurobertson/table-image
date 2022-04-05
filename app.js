@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.appendChild(row);
       for (let x = 0; x < data[y].length; x++) {
         const cell = document.createElement("td");
-        cell.classList.add("cell");
         cell.style.backgroundColor = `rgba(${data[x][y].r}, ${data[x][y].g}, ${data[x][y].b}, ${data[x][y].a})`;
         row.appendChild(cell);
       }
