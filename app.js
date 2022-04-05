@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("input");
   const canvas = document.createElement("canvas");
-  //   const loader = document.getElementById("loader");
   const ctx = canvas.getContext("2d");
   const worker = new Worker("worker.js");
 
